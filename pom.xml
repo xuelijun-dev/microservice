@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xue.springcloud</groupId>
+    <artifactId>microservice</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>microservice</name>
+    <description>父工程</description>
+    <!-- packaging: 打包的机制，如pom, jar, maven-plugin, ejb, war, ear, rar, par   -->
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Edgware.SR6</spring-cloud.version>
+    </properties>
+
+    <!--增加相应都值给父pom，用于子项目都继承-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.21.RELEASE</version>
+        <relativePath/>  <!--relativePath可以不需要，但是用于指明parent的目录，用于快速查询。-->
+    </parent>
+
+    <!--用于父项目配置共同的依赖关系，主要配置依赖包相同因素 spring-cloud -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.47</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <!--插件需要依赖的包-->
+    <dependencies>
+        <!--Spring Boot的核心启动器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!--web服务依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--web服务测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+<!--        &lt;!&ndash;eureka server依赖 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;配置服务依赖&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-config-server</artifactId>-->
+<!--        </dependency>-->
+
+
+    </dependencies>
+
+    <build>
+        <finalName>microservice</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <delimiters>
+                        <delimit>$</delimit>
+                    </delimiters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--子模块-->
+    <modules>
+        <module>eureka-server</module>
+        <module>config-server</module>
+        <module>provider-user</module>
+        <module>service-hi</module>
+        <module>microservice-api</module>
+        <module>microservice-provider-dept-8001</module>
+        <module>microservice-provider-dept-8002</module>
+        <module>microservice-provider-dept-8003</module>
+        <module>microservice-provider-dept-hystrix-8001</module>
+        <module>microservice-consumer-dept-80</module>
+        <module>microservice-consumer-dept-feign-80</module>
+        <module>config-server-7001</module>
+        <module>config-server-7002</module>
+        <module>config-server-7003</module>
+        <module>microservice-consumer-hystrix-dashboard</module>
+        <module>microservice-zuul-gateway-9527</module>
+    </modules>
+</project>

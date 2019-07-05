@@ -1,0 +1,5 @@
+com\xue\springcloud\microserviceapi\MicroserviceApiApplication.class
+com\xue\springcloud\microserviceapi\service\DeptClientServiceFallBackFactory$1.class
+com\xue\springcloud\microserviceapi\entities\Dept.class
+com\xue\springcloud\microserviceapi\service\DeptClientService.class
+com\xue\springcloud\microserviceapi\service\DeptClientServiceFallBackFactory.class
